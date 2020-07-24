@@ -35,6 +35,7 @@ class FriendsStoryWidget extends StatelessWidget {
         user.hora,
         style: stylesApp.messageChat,
       ),
+      onTap: onTap,
     );
   }
 }

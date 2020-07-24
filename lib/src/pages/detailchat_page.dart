@@ -14,19 +14,16 @@ class DetailChat extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: <Widget>[
-            Hero(
-              tag: user.id,
-              child: CircleAvatar(
-                radius: 20,
-                child: ClipOval(
-                  child: CachedNetworkImage(
-                    width: 50,
-                    height: 80,
-                    imageUrl: user.url,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
+            CircleAvatar(
+              radius: 20,
+              child: ClipOval(
+                child: CachedNetworkImage(
+                  width: 50,
+                  height: 80,
+                  imageUrl: user.url,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
             ),

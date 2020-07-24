@@ -37,32 +37,33 @@ class _ChatPageState extends State<ChatPage>
               return Text("active", style: stylesApp.body);
 
             case ConnectionState.done:
-              return ListView.separated(
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  UserResponse userResponse = snapshot.data[index];
-                  return Hero(
-                    tag: userResponse.id,
-                    child: ChatWidget(
-                      user: userResponse,
-                      onTap: () {
-                        print(userResponse.id);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DetailChat(
-                                      user: userResponse,
-                                    )));
-                      },
-                    ),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 90, right: 20),
-                    child: Divider(color: Colors.white.withOpacity(0.35)),
-                  );
-                },
+              return Center(
+                child: Container(
+                  child: ListView.separated(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      UserResponse userResponse = snapshot.data[index];
+                      return ChatWidget(
+                        user: userResponse,
+                        onTap: () {
+                          print(userResponse.id);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailChat(
+                                        user: userResponse,
+                                      )));
+                        },
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 90, right: 20),
+                        child: Divider(color: Colors.white.withOpacity(0.35)),
+                      );
+                    },
+                  ),
+                ),
               );
 
             case ConnectionState.waiting:
@@ -73,14 +74,14 @@ class _ChatPageState extends State<ChatPage>
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
+      /* floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xff00BFA5),
         onPressed: () {},
         child: Icon(
           Icons.message,
           color: Colors.white,
         ),
-      ),
+      ), */
     );
   }
 

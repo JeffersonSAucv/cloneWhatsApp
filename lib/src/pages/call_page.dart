@@ -63,7 +63,9 @@ class _CallPageState extends State<CallPage>
       ),
       floatingActionButton: CustomFloatingActionsButtons(
         icon1: Icons.video_call,
+        tag1: "iconvideocalltatus",
         icon2: Icons.call,
+        tag2: "iconcalltatus",
       ),
     );
   }

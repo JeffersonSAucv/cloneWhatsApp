@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 4);
+    _tabController = TabController(vsync: this, length: 4, initialIndex: 1);
   }
 
   @override
@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage>
       body: TabBarView(
         controller: _tabController,
         children: [
-          Icon(Icons.message),
+          Icon(Icons.camera),
           ChatPage(),
           StatusPage(),
           CallPage(),

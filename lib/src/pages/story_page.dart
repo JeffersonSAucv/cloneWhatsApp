@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/src/models/userResponder_model.dart';
+import 'package:whatsappclone/src/pages/detail_status.dart';
 import 'package:whatsappclone/src/services/apiCall.dart';
 import 'package:whatsappclone/src/styles/styles.dart';
 
@@ -40,49 +41,65 @@ class _StatusPageState extends State<StatusPage>
                 style: stylesApp.messageStatus,
               ),
             ),
-            FutureBuilder(
-              future: ApiCall().apiCall(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                    return Text("error", style: stylesApp.body);
+            Center(
+              child: Container(
+                child: FutureBuilder(
+                  future: ApiCall().apiCall(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                        return Text("error", style: stylesApp.body);
 
-                  case ConnectionState.active:
-                    return Text("active", style: stylesApp.body);
+                      case ConnectionState.active:
+                        return Text("active", style: stylesApp.body);
 
-                  case ConnectionState.done:
-                    return ListView.separated(
-                      shrinkWrap: true,
-                      primary: false,
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        UserResponse userResponse = snapshot.data[index];
-                        return FriendsStoryWidget(
-                          user: userResponse,
+                      case ConnectionState.done:
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          primary: false,
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            UserResponse userResponse = snapshot.data[index];
+                            return FriendsStoryWidget(
+                              user: userResponse,
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailStatusPage(
+                                              user: userResponse,
+                                            )));
+                              },
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 90, right: 20),
+                              child: Divider(
+                                  color: Colors.white.withOpacity(0.35)),
+                            );
+                          },
                         );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 90, right: 20),
-                          child: Divider(color: Colors.white.withOpacity(0.35)),
-                        );
-                      },
-                    );
 
-                  case ConnectionState.waiting:
-                    return Center(child: CircularProgressIndicator());
+                      case ConnectionState.waiting:
+                        return Center(child: CircularProgressIndicator());
 
-                  default:
-                    return Text("done", style: stylesApp.body);
-                }
-              },
+                      default:
+                        return Text("done", style: stylesApp.body);
+                    }
+                  },
+                ),
+              ),
             ),
           ],
         ),
       ),
       floatingActionButton: CustomFloatingActionsButtons(
         icon1: Icons.person,
+        tag1: "iconpersonstatus",
         icon2: Icons.camera_alt,
+        tag2: "iconcamerastatus",
       ),
     );
   }
