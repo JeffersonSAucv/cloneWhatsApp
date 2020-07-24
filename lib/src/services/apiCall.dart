@@ -6,7 +6,7 @@ class ApiCall {
   Future apiCall() async {
     final response = await http.get(API_URL);
     if (response.statusCode == 200) {
-      //print(response.body);
+      print("/////////////me ejecuto");
       return userResponseFromJson(response.body);
     } else {
       throw Exception('Error al cargar');

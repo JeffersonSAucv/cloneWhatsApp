@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final stylesApp = StylesApp();
   TabController _tabController;
 
@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -66,4 +67,7 @@ class _HomePageState extends State<HomePage>
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

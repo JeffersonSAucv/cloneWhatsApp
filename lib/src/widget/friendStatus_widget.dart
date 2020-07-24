@@ -13,17 +13,20 @@ class FriendsStoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: Color(0xff00BFA5),
-        radius: 40,
-        child: ClipOval(
-          child: CachedNetworkImage(
-            width: 52,
-            height: 52,
-            imageUrl: user.thumbnailUrl,
-            fit: BoxFit.cover,
-            placeholder: (context, url) => CircularProgressIndicator(),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+      leading: Hero(
+        tag: user.id,
+        child: CircleAvatar(
+          backgroundColor: Color(0xff00BFA5),
+          radius: 40,
+          child: ClipOval(
+            child: CachedNetworkImage(
+              width: 52,
+              height: 52,
+              imageUrl: user.thumbnailUrl,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
           ),
         ),
       ),
